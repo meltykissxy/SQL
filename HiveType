@@ -1,0 +1,21 @@
+create table TestA(
+    id int,
+    name string,
+    salary decimal(16,2),
+    aa array<string>,
+    bb map<String,int>,
+    cc struct<name:string,age:int,salary:decimal(16,2)>,
+    dd array<struct<name:string,age:int,salary:decimal(16,2)>>
+)
+row format delimited fields terminated by '\t';
+
+insert into TestA values(13,
+                         'lss',19000.56,
+                         array('lss','lxy'),
+                         `map`('lss',16,'lxy',18),
+                         named_struct('name', 'lss', 'age', 16,'salary',15900.56),
+                         `array`(named_struct('name', 'lss', 'age', 16,'salary',15900.56)));
+
+select `array`(13,15,16);
+select named_struct('name', 'lss', 'age', 16);
+select `map`('lss',16,'lxy',18);
